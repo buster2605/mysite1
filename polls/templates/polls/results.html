@@ -1,3 +1,6 @@
+{% load staticfiles %}
+<link rel="shortcut icon" type="image/png" href="{% static 'polls/images/favicon.jpg' %}"/>
+<title>Results</title>
 <h1>{{ question.question_text }}</h1>
 <ul>
 {% for choice in question.choice_set.all %}
