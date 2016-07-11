@@ -1,3 +1,46 @@
-li a{
+li a:link{
 	color:green;
+}
+
+li a:visited{
+	color:green;
+}
+
+li a:hover{
+	color:green;
+}
+
+.jumbotron {
+	background-color:#dff0d8;
+}
+
+.greenColor {
+	font-color:green;
+}
+.allQuestions{
+	position:relative;
+	max-width: 1000px;
+}
+.footer{
+	position:fixed;
+	bottom:0;
+	padding-top:10px;
+	background-color:#dff0d8;
+	text-align:center;
+	min-width:100%;
+}
+.shift{
+	position:relative;
+	left:-3%;
+}
+.gap{
+	height:10%;
+	width:100%;
+}
+input[type=radio]{
+	margin: 10px;	
+}
+.marginKeeper{
+	margin-left:5%;
+	margin-bottom:4%;
 }

@@ -1,13 +1,25 @@
 {% load staticfiles %}
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap-theme.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/style.css' %}" />
 <link rel="shortcut icon" type="image/png" href="{% static 'polls/images/favicon.jpg' %}"/>
 <title>Choices</title>
+<div class = "jumbotron text-center">
 <h1>{{ question }}</h1>
+</div>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action = "{% url 'polls:vote' question.id %}" method = "post">
 {% csrf_token %}
-{% for choice in question.choice_set.all %}
-	<input type='radio' name='choice' id='choice{{ forloop.counter }}' value = "{{choice.id}}">
-	<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
+<div class = "marginKeeper">
+	{% for choice in question.choice_set.all %}
+		<div class = "container">
+			<input type='radio' name='choice' id='choice{{ forloop.counter }}' value = "{{choice.id}}">
+			<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+		</div>
+	{% endfor %}
+	</div>
+<div class = "container">
+	<input type="submit" value="Vote" class = 'btn btn-block btn-primary'/>
+</div>
 </form>

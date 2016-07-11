@@ -1,14 +1,27 @@
 {% load staticfiles %}
 <link rel="shortcut icon" type="image/jpg" href="{% static 'polls/images/favicon.jpg' %}"/>
 <title>Questions</title>
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap-theme.css' %}" />
 <link rel='stylesheet' type='text/css' href="{% static 'polls/css/style.css' %}" />
 {% if latest_question_list%}
-	<h1>Questions</h1>
-	<ul>
-	{% for question in latest_question_list %}
-		<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-	{% endfor %}
-	</ul>
+	<div>
+		<div class = "jumbotron text-center">
+			<h1 class = "greenColor">Questions</h1>
+		</div>
+	</div>
+	<div class = "container center allQuestions">
+		<ul class = "shift">
+		{% for question in latest_question_list %}
+			<li class = "list-group-item list-group-item-success text-center"><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
 {% else %}
 	<p> No polls questions are available </p>
 {% endif %}
+<div class = "gap"></div>
+<div class = "footer text-center">
+<p>Polls App</p>
+</div>
