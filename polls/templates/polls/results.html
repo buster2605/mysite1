@@ -1,10 +1,25 @@
 {% load staticfiles %}
 <link rel="shortcut icon" type="image/png" href="{% static 'polls/images/favicon.jpg' %}"/>
 <title>Results</title>
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/bootstrap-theme.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'polls/css/style.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'polls/images/favicon.jpg' %}"/>
+<div class = 'jumbotron text-center'>
 <h1>{{ question.question_text }}</h1>
+</div>
+<div class = 'marginKeeper'>
 <ul>
 {% for choice in question.choice_set.all %}
-	<li>{{choice.choice_text}} -- {{ choice.votes }} vote{{ choice.votes|pluralize}}</li>
+	<li class = 'voteNumber list-group-item list-group-item-success text-center'>{{choice.choice_text}} -- {{ choice.votes }} vote{{ choice.votes|pluralize}}</li>
 {% endfor %}
 </ul>
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+<div class = "container">
+<a class="btn btn-block btn-primary" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+<div class = "gap"></div>
+<div class = "footer text-center">
+<p>Polls App</p>
+</div>
