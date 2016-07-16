@@ -4,10 +4,11 @@ from polls.models import Question, Choice
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
 # Create your views here.
-
-
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -17,7 +18,10 @@ class IndexView(generic.ListView):
         return Question.objects.filter(
 		pub_date__lte=timezone.now()
 		).order_by('-pub_date')[:5]
-
+ 
+    #@method_decorator(login_required)
+    #def dispatch(self, *args, **kwargs):
+    #    return super(IndexView, self).dispatch(*args, **kwargs)
 
 class DetailView(generic.DetailView):
     model = Question
