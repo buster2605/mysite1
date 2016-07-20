@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 
 # Create your views here.
 class IndexView(generic.ListView):
+    login_required = True
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
