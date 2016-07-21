@@ -7,6 +7,11 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from django.contrib.auth import logout
+from django import forms
+from polls.forms import *
+from django.template import RequestContext
+from django.shortcuts import render, render_to_response
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -51,3 +56,25 @@ def vote(request, question_id):
 		selected_choice.votes += 1
 		selected_choice.save()
 	return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+
+def logout_page(request):
+	logout(request)
+	return HttpResponseRedirect('/login')
+
+class RegistrationForm(forms.Form):
+	username = forms.CharField(label='Username', max_length=30)
+	email = forms.EmailField(label='Email')
+	password1 = forms.CharField(label='Password',
+				widget=forms.PasswordInput())
+	password2 = forms.CharField(label='Password(Again)',
+				widget=forms.PasswordInput())
+
+def register_page(request):
+	if request.method == 'POST':
+		form = RegistrationForm(request.POST)
+		if form.is_valid():
+			user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
+			return HttpResponseRedirect('/polls')
+	form = RegistrationForm()
+	variables = RequestContext(request,{'form':form})
+	return render_to_response('registration/register.html', variables)
