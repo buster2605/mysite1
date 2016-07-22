@@ -19,7 +19,11 @@
 <div class = "container">
 <a class="btn btn-block btn-primary" href="{% url 'polls:detail' question.id %}">Vote again?</a>
 </div>
-<div class = "gap"></div>
+<div class = "container" >
+<div style='margin:20px'>
+<button onclick='window.location.href="/polls"'  class="btn btn-block btn-primary">Polls</button>
+</div>
+</div>
 <div class = "footer text-center">
 <p>Polls App</p>
 </div>

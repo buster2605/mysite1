@@ -2,6 +2,11 @@
 {% block title %}User Registration{% endblock %}
 {% block head %}User Registration{% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
+<script>
+	window.location = "/polls";
+</script>
+{% endif %}
 <form method="post" action=".">
 {{ form.as_p }}
 <input type="submit" value="register" />
