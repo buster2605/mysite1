@@ -28,7 +28,7 @@ ALLOWED_HOSTS = []
 
 #Login Redirect 
 LOGIN_REDIRECT_URL = '/polls/'
-
+LOGIN_URL = '/login'
 # Application definition
 
 INSTALLED_APPS = (

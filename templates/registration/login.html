@@ -5,6 +5,7 @@
 {% if form.has_errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
+{%if not user.is_authenticated %}
 <form method="post" action=".">
 <p><label for="id_username">Username:</label>
 {{ form.username }}</p>
@@ -14,4 +15,5 @@
 <input type="hidden" name="next" value="/polls" />
 {% csrf_token %}
 </form>
+{% endif %}
 {% endblock %}

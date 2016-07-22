@@ -6,7 +6,7 @@ from polls.views import register_page #, base_page
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', base_page, name='home'),
+    url(r'^$', views.login),
     # url(r'^blog/', include('blog.urls')),
     url(r'^login/$', views.login),
     url(r'^register/$', register_page),
