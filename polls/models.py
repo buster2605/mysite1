@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, User
 
 import datetime
 
@@ -27,6 +27,10 @@ class Choice(models.Model):
 	
 	def __unicode__(self): #__str__ for python 3
 		return self.choice_text
+
+class Voter(models.Model):
+	user = models.ForeignKey(User)
+	question = models.ForeignKey(Question)
 
 #class User(AbstractBaseUser, PermissionsMixin):
 #	USERNAME_FIELD = 'email'

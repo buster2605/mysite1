@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from polls.models import Question, Choice
+from polls.models import Question, Choice, Voter
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
@@ -44,6 +44,11 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
 	p = get_object_or_404(Question, pk=question_id)
+	if Voter.objects.filter(question_id=question_id, user_id=request.user.id).exists():
+		return render(request, 'polls/detail.html',{
+			'question':p,
+			'error_message': 'you have already voted'
+			})
 	try:
 		selected_choice = p.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
@@ -55,6 +60,8 @@ def vote(request, question_id):
 	else:
 		selected_choice.votes += 1
 		selected_choice.save()
+		v = Voter(user = request.user, question=p)
+		v.save()
 	return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
 def logout_page(request):
